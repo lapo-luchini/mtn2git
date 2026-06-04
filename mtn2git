@@ -1,6 +1,26 @@
 #!/bin/sh
 dir=_MTN/mtn2git
 git="git -C $dir"
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+  echo "Usage: $0 [remote]"
+  echo ""
+  echo "Syncs a Monotone repository to Git and mirrors it to configured remotes."
+  echo ""
+  echo "Arguments:"
+  echo "  remote    Git remote URL to add on first usage (required for initial setup)"
+  echo ""
+  echo "Options:"
+  echo "  -h, --help    Show this help message and exit"
+  echo ""
+  echo "Notes:"
+  echo "  - Must be run from the repository root (where _MTN/ exists)."
+  echo "  - On first run, a remote URL must be provided."
+  echo "  - Additional remotes can be added later with:"
+  echo "      git -C $dir remote add <name> <address>"
+  exit 0
+fi
+
 if [ ! -d _MTN ]; then
   echo "Usage: $0 [remote]"
   echo "You need to execute this from the repository root."
